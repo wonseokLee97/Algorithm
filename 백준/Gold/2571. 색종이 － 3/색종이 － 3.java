@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+// 누적합
+
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -70,6 +72,10 @@ public class Main {
         System.out.println(ans);
     }
 }
+
+
+// 처음 풀이에서는 가로열의 끝까지 도달한 후, 세로의 누적합의 최소를 곱해서 오답이 나왔다.
+// 이후 풀이에서는 가로열의 끝까지 도달하는 과정마다, 세로의 누적합의 최소를 곱해서 직사각형의 넓이를 구해주었다.
 
 
 // 0 1 2 3 4
