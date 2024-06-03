@@ -32,6 +32,10 @@ public class Main {
 
             total += card;
 
+            if (cnt == 0) {
+                continue;
+            }
+
             if (cnt % 2 == 0) {
                 sum += total;
 //                System.out.println(total + " 집어넣는다!");
