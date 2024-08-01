@@ -1,0 +1,41 @@
+-- 코드를 입력하세요
+SELECT 
+    CC.CAR_ID, 
+    CC.CAR_TYPE, 
+    round((CC.DAILY_FEE * 30) * (1 - CDP.DISCOUNT_RATE * 0.01), 0) AS FEE
+FROM CAR_RENTAL_COMPANY_CAR CC
+    JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY RH ON CC.CAR_ID = RH.CAR_ID
+    JOIN CAR_RENTAL_COMPANY_DISCOUNT_PLAN CDP ON CC.CAR_TYPE = CDP.CAR_TYPE
+WHERE 1=1
+    AND (CC.CAR_ID NOT IN(
+        SELECT CAR_ID
+        FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+        WHERE END_DATE >= '2022-11-01' AND START_DATE <= '2022-12-01'
+    ))
+    AND (CDP.DURATION_TYPE LIKE '30%')
+GROUP BY CC.CAR_ID
+HAVING 1=1
+    AND CC.CAR_TYPE IN ('세단', 'SUV') 
+    AND (FEE >= 500000 AND FEE < 2000000)
+ORDER BY FEE DESC, CAR_TYPE ASC, CAR_ID DESC
+;
+
+
+
+
+# CAR_RENTAL_COMPANY_CAR 테이블과 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블과 CAR_RENTAL_COMPANY_DISCOUNT_PLAN 테이블에서 
+
+# 자동차 종류가 '세단' 또는 'SUV' 인 자동차 중 
+# CAR_RENTAL_COMPANY_CAR 
+
+# 2022년 11월 1일부터 2022년 11월 30일까지 대여 가능하고 
+# END_DATE가 11월 1일 이전
+# CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+
+# 30일간의 대여 금액이 50만원 이상 200만원 미만인 자동차에 대해서 
+# CAR_RENTAL_COMPANY_DISCOUNT_PLAN * 30 * 할인율
+
+# 자동차 ID, 자동차 종류, 대여 금액(컬럼명: FEE) 
+# 리스트를 출력하는 SQL문을 작성해주세요.
+
+# 결과는 대여 금액을 기준으로 내림차순 정렬하고, 대여 금액이 같은 경우 자동차 종류를 기준으로 오름차순 정렬, 자동차 종류까지 같은 경우 자동차 ID를 기준으로 내림차순 정렬해주세요.
