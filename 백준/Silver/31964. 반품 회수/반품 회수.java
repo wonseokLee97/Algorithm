@@ -17,7 +17,7 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int L = arr[N - 1];
+        long L = arr[N - 1];
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
@@ -25,12 +25,12 @@ public class Main {
         }
 
         int idx = 0;
-        int min_wait = 0;
-        for (int i = 0; i < L; i++) {
+        long min_wait = 0;
+        for (int i = 0; i <= L; i++) {
             // 택배 수거 위치
             if (arr[idx] == i) {
                 int t1 = i; // 갈 때,
-                int t2 = L * 2 - i; // 돌아올 때,
+                long t2 = L * 2 - i; // 돌아올 때,
 
                 // 수거 불가능
                 if (time[idx] > t1 + min_wait && time[idx] > t2 + min_wait) {
@@ -49,7 +49,12 @@ public class Main {
 // min_wait = 3;
 // 100,000,000
 
-//         20           4      16           11
+//          4           4      35           18
+//  0   1   2   3   4   5   6   7   8   9   10
+//  0   1   2   3   4   5   6   7   8   9   10
+// 20  19  18  17  16  15  14  13  12  11   10
+
+//          3           6       8           11
 //  0   1   2   3   4   5   6   7   8   9   10
 //  0   1   2   3   4   5   6   7   8   9   10
 // 20  19  18  17  16  15  14  13  12  11
